@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Vehicle Exit</title>
+
+<style>
+
+/* RESET */
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:'Segoe UI',sans-serif;
+}
+
+body{
+background:#0f172a;
+color:white;
+display:flex;
+}
+
+/* SIDEBAR */
+.sidebar{
+width:250px;
+height:100vh;
+background:#111827;
+position:fixed;
+left:0;
+top:0;
+padding:20px;
+}
+
+.sidebar h2{
+color:#38bdf8;
+text-align:center;
+margin-bottom:20px;
+}
+
+.sidebar a{
+display:block;
+color:white;
+text-decoration:none;
+padding:10px;
+background:#1e293b;
+border-radius:8px;
+margin-top:8px;
+}
+
+.sidebar a:hover{
+background:#38bdf8;
+}
+
+/* MAIN */
+.main{
+margin-left:270px;
+padding:30px;
+width:100%;
+}
+
+/* CONTAINER */
+.container{
+max-width:800px;
+margin:auto;
+background:#1e293b;
+padding:25px;
+border-radius:15px;
+}
+
+h1{
+text-align:center;
+color:#38bdf8;
+margin-bottom:20px;
+}
+
+.input-group{
+margin-bottom:15px;
+}
+
+label{
+display:block;
+margin-bottom:5px;
+font-weight:bold;
+}
+
+input,select{
+width:100%;
+padding:10px;
+border:none;
+border-radius:8px;
+background:#0f172a;
+color:white;
+}
+
+.time-box{
+display:grid;
+grid-template-columns:1fr 1fr 1fr;
+gap:10px;
+}
+
+button{
+width:100%;
+padding:12px;
+border:none;
+border-radius:10px;
+background:#0ea5e9;
+color:white;
+font-weight:bold;
+cursor:pointer;
+margin-top:10px;
+}
+
+button:hover{
+background:#0284c7;
+}
+
+.result{
+margin-top:20px;
+padding:15px;
+border-radius:10px;
+background:#14532d;
+display:none;
+}
+
+</style>
+</head>
+
+<body>
+
+<!-- SIDEBAR -->
+<div class="sidebar">
+
+<h2>🚗 Smart Parking</h2>
+
+<a href="dashboard.html">📊 Dashboard</a>
+<a href="entry.html">🚘 Vehicle Entry</a>
+<a href="exit.html">🚪 Vehicle Exit</a>
+<a href="billing.html">💰 Billing</a>
+<a href="alerts.html">🚨 Alerts</a>
+<a href="reports.html">📈 Reports</a>
+
+<hr>
+
+<a href="index.html">🔐 Logout</a>
+
+</div>
+
+<!-- MAIN -->
+<div class="main">
+
+<div class="container">
+
+<h1>🚗 Vehicle Exit System</h1>
+
+<div class="input-group">
+<label>Vehicle Number</label>
+<input type="text" id="vehicle">
+</div>
+
+<div class="input-group">
+<label>Entry Time (Hours Only)</label>
+<input type="number" id="entryTime" placeholder="e.g. 10">
+</div>
+
+<div class="input-group">
+<label>Exit Time (Hours Only)</label>
+<input type="number" id="exitTime" placeholder="e.g. 13">
+</div>
+
+<button onclick="calculateBill()">Generate Bill</button>
+
+<div class="result" id="result"></div>
+
+</div>
+
+</div>
+
+<script>
+
+function calculateBill(){
+
+let vehicle = document.getElementById("vehicle").value;
+let entry = parseInt(document.getElementById("entryTime").value);
+let exit = parseInt(document.getElementById("exitTime").value);
+
+if(!vehicle || isNaN(entry) || isNaN(exit)){
+alert("Fill all fields");
+return;
+}
+
+if(exit <= entry){
+alert("Exit must be greater than entry time");
+return;
+}
+
+let duration = exit - entry;
+let rate = 30;
+let fee = duration * rate;
+
+let result = document.getElementById("result");
+result.style.display = "block";
+
+result.innerHTML = `
+<h3>✅ Bill Generated</h3>
+Vehicle: <b>${vehicle}</b><br>
+Duration: <b>${duration} Hours</b><br>
+Rate: <b>₹${rate}/hr</b><br>
+Total: <b>₹${fee}</b><br><br>
+
+🅿 Slot Released Successfully
+`;
+
+}
+
+</script>
+
+</body>
+</html>

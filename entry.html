@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Vehicle Entry</title>
+
+<style>
+body{
+  margin:0;
+  font-family:Segoe UI;
+  background:#0f172a;
+  color:white;
+}
+
+.container{
+  width:400px;
+  margin:100px auto;
+  background:#1e293b;
+  padding:20px;
+  border-radius:12px;
+}
+
+input, button{
+  width:100%;
+  padding:10px;
+  margin-top:10px;
+  border:none;
+  border-radius:8px;
+}
+
+button{
+  background:#38bdf8;
+  color:black;
+  font-weight:bold;
+  cursor:pointer;
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+  <h2>🚗 Vehicle Entry</h2>
+
+  <input type="text" id="carNumber" placeholder="Enter Vehicle Number">
+
+  <button onclick="addVehicle()">Add Vehicle</button>
+</div>
+
+<!-- FIREBASE -->
+<script type="module">
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
+  import { getDatabase, ref, set } 
+  from "https://www.gstatic.com/firebasejs/10.12.0/firebase-database.js";
+
+  const firebaseConfig = {
+    apiKey: "AIzaSyC-MpKMFGvH3FHJyF1n1SGT-WJsUBKd_RY",
+    authDomain: "smartparking-1803.firebaseapp.com",
+    databaseURL: "https://smartparking-1803-default-rtdb.asia-southeast1.firebasedatabase.app",
+    projectId: "smartparking-1803",
+    storageBucket: "smartparking-1803.firebasestorage.app",
+    messagingSenderId: "642103736914",
+    appId: "1:642103736914:web:2c2307880c90ab30c2bd8b"
+  };
+
+  const app = initializeApp(firebaseConfig);
+  const db = getDatabase(app);
+
+  window.addVehicle = function () {
+    const number = document.getElementById("carNumber").value;
+
+    if (!number) {
+      alert("Enter vehicle number!");
+      return;
+    }
+
+    // Save to Firebase
+    set(ref(db, "vehicles/" + number), {
+      number: number,
+      status: "parked",
+      time: new Date().toString()
+    });
+
+    alert("Vehicle Added 🚗");
+
+    document.getElementById("carNumber").value = "";
+  };
+</script>
+
+</body>
+</html>

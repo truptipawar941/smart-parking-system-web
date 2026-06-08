@@ -1,0 +1,204 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Reports System</title>
+
+    <style>
+      /* RESET */
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: "Segoe UI", sans-serif;
+      }
+
+      body {
+        background: #0f172a;
+        color: white;
+        display: flex;
+      }
+
+      /* SIDEBAR */
+      .sidebar {
+        width: 250px;
+        height: 100vh;
+        background: #111827;
+        position: fixed;
+        left: 0;
+        top: 0;
+        padding: 20px;
+      }
+
+      .sidebar h2 {
+        color: #38bdf8;
+        text-align: center;
+        margin-bottom: 20px;
+      }
+
+      .sidebar a {
+        display: block;
+        color: white;
+        text-decoration: none;
+        padding: 10px;
+        background: #1e293b;
+        border-radius: 8px;
+        margin-top: 8px;
+      }
+
+      .sidebar a:hover {
+        background: #38bdf8;
+      }
+
+      /* MAIN */
+      .main {
+        margin-left: 270px;
+        padding: 30px;
+        width: 100%;
+      }
+
+      /* CONTAINER */
+      .container {
+        max-width: 1000px;
+        margin: auto;
+        background: #1e293b;
+        padding: 25px;
+        border-radius: 15px;
+      }
+
+      h1 {
+        text-align: center;
+        color: #38bdf8;
+        margin-bottom: 20px;
+      }
+
+      /* BUTTON */
+      button {
+        padding: 10px 15px;
+        border: none;
+        border-radius: 8px;
+        background: #0ea5e9;
+        color: white;
+        font-weight: bold;
+        cursor: pointer;
+        margin-bottom: 15px;
+      }
+
+      button:hover {
+        background: #0284c7;
+      }
+
+      /* TABLE */
+      table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-top: 10px;
+      }
+
+      th,
+      td {
+        padding: 12px;
+        text-align: center;
+        border-bottom: 1px solid #334155;
+      }
+
+      th {
+        background: #0f172a;
+        color: #38bdf8;
+      }
+
+      tr:hover {
+        background: #0f172a;
+      }
+
+      .badge {
+        padding: 5px 10px;
+        border-radius: 8px;
+        font-size: 12px;
+        font-weight: bold;
+      }
+
+      .in {
+        background: #22c55e;
+      }
+
+      .out {
+        background: #ef4444;
+      }
+    </style>
+  </head>
+
+  <body>
+    <!-- SIDEBAR -->
+    <div class="sidebar">
+      <h2>🚗 Smart Parking</h2>
+
+      <a href="dashboard.html">📊 Dashboard</a>
+      <a href="entry.html">🚘 Vehicle Entry</a>
+      <a href="exit.html">🚪 Vehicle Exit</a>
+      <a href="billing.html">💰 Billing</a>
+      <a href="alerts.html">🚨 Alerts</a>
+      <a href="reports.html">📈 Reports</a>
+
+      <hr />
+
+      <a href="index.html">🔐 Logout</a>
+    </div>
+
+    <!-- MAIN -->
+    <div class="main">
+      <div class="container">
+        <h1>📈 Parking Reports</h1>
+
+        <button onclick="generateReport()">Generate Report</button>
+
+        <table>
+          <thead>
+            <tr>
+              <th>Vehicle No</th>
+              <th>Slot</th>
+              <th>Time</th>
+              <th>Status</th>
+            </tr>
+          </thead>
+
+          <tbody id="reportBody">
+            <tr>
+              <td colspan="4">No reports yet</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <script>
+      // SAMPLE DATA (you can later connect Firebase)
+      let data = [
+        { vehicle: "MH12AB1234", slot: "S1", time: "10:00 AM", status: "IN" },
+        { vehicle: "MH14XY5678", slot: "S2", time: "10:30 AM", status: "OUT" },
+        { vehicle: "MH01AA1111", slot: "S3", time: "11:00 AM", status: "IN" },
+      ];
+
+      function generateReport() {
+        let tbody = document.getElementById("reportBody");
+        tbody.innerHTML = "";
+
+        data.forEach((item) => {
+          let statusClass = item.status === "IN" ? "in" : "out";
+
+          let row = `
+<tr>
+<td>${item.vehicle}</td>
+<td>${item.slot}</td>
+<td>${item.time}</td>
+<td><span class="badge ${statusClass}">${item.status}</span></td>
+</tr>
+`;
+
+          tbody.innerHTML += row;
+        });
+      }
+    </script>
+  </body>
+</html>

@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Smart Vehicle Management System</title>
+
+<link rel="stylesheet"
+href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+<style>
+
+/* ===== YOUR FULL CSS (UNCHANGED) ===== */
+
+*
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:'Segoe UI',sans-serif;
+}
+
+body{
+    height:100vh;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    overflow:hidden;
+
+    background:linear-gradient(135deg,#0f172a,#1e293b,#0f172a);
+    background-size:400% 400%;
+    animation:bgMove 10s infinite alternate;
+}
+
+@keyframes bgMove{
+    0%{background-position:left;}
+    100%{background-position:right;}
+}
+
+.circle{
+    position:absolute;
+    border-radius:50%;
+    background:rgba(255,255,255,0.05);
+    animation:float 12s infinite linear;
+}
+
+.circle:nth-child(1){
+    width:250px;
+    height:250px;
+    top:-100px;
+    left:-100px;
+}
+
+.circle:nth-child(2){
+    width:180px;
+    height:180px;
+    bottom:-50px;
+    right:-50px;
+}
+
+@keyframes float{
+    from{transform:translateY(0);}
+    to{transform:translateY(-50px);}
+}
+
+.login-box{
+    width:420px;
+    padding:40px;
+    background:rgba(255,255,255,0.08);
+    backdrop-filter:blur(15px);
+    border:1px solid rgba(255,255,255,0.2);
+    border-radius:25px;
+    text-align:center;
+    color:white;
+    box-shadow:0 8px 32px rgba(0,0,0,0.4);
+}
+
+.logo{
+    font-size:65px;
+    color:#38bdf8;
+    margin-bottom:15px;
+}
+
+h1{margin-bottom:10px;}
+.subtitle{color:#cbd5e1;margin-bottom:25px;}
+
+.input-group{
+    position:relative;
+    margin-bottom:18px;
+}
+
+.input-group i{
+    position:absolute;
+    left:15px;
+    top:16px;
+    color:#94a3b8;
+}
+
+.input-group input,
+.input-group select{
+    width:100%;
+    padding:14px 14px 14px 45px;
+    border:none;
+    outline:none;
+    border-radius:12px;
+    background:#1e293b;
+    color:white;
+}
+
+.select-arrow{
+    position:absolute;
+    right:15px;
+    top:16px;
+    color:#94a3b8;
+}
+
+button{
+    width:100%;
+    padding:14px;
+    border:none;
+    border-radius:12px;
+    background:#0ea5e9;
+    color:white;
+    font-size:16px;
+    font-weight:bold;
+    cursor:pointer;
+}
+
+button:hover{
+    background:#0284c7;
+}
+
+.footer{
+    margin-top:20px;
+    color:#94a3b8;
+    font-size:13px;
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="circle"></div>
+<div class="circle"></div>
+
+<div class="login-box">
+
+<i class="fas fa-car-side logo"></i>
+
+<h1>Smart Vehicle System</h1>
+<p class="subtitle">Parking & Vehicle Monitoring Platform</p>
+
+<!-- ✅ FIXED FORM -->
+<form onsubmit="login(event)">
+
+<!-- Username -->
+<div class="input-group">
+<i class="fas fa-user"></i>
+<input type="text" placeholder="Username" required>
+</div>
+
+<!-- Password -->
+<div class="input-group">
+<i class="fas fa-lock"></i>
+<input type="password" placeholder="Password" required>
+</div>
+
+<!-- Vehicle Type -->
+<div class="input-group">
+<i class="fas fa-car"></i>
+<select required>
+<option value="">Select Vehicle Type</option>
+<option>Car</option>
+<option>Bike</option>
+<option>SUV</option>
+<option>Truck</option>
+<option>Bus</option>
+<option>Electric Vehicle</option>
+</select>
+<i class="fas fa-chevron-down select-arrow"></i>
+</div>
+
+<!-- State -->
+<div class="input-group">
+<i class="fas fa-map-marker-alt"></i>
+<select required>
+<option value="">Select State Code</option>
+<option>MH - Maharashtra</option>
+<option>KA - Karnataka</option>
+<option>DL - Delhi</option>
+<option>GJ - Gujarat</option>
+<option>RJ - Rajasthan</option>
+<option>UP - Uttar Pradesh</option>
+<option>TN - Tamil Nadu</option>
+<option>TS - Telangana</option>
+<option>AP - Andhra Pradesh</option>
+<option>KL - Kerala</option>
+<option>WB - West Bengal</option>
+<option>PB - Punjab</option>
+<option>HR - Haryana</option>
+</select>
+<i class="fas fa-chevron-down select-arrow"></i>
+</div>
+
+<!-- Login -->
+<button type="submit">Login</button>
+
+</form>
+
+<div class="footer">
+© 2026 Smart Parking System
+</div>
+
+</div>
+
+<!-- ✅ JS -->
+<script>
+function login(event){
+    event.preventDefault();
+    window.location.href = "dashboard.html";
+}
+</script>
+
+</body>
+</html>

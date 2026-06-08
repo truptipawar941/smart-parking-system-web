@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Alerts System</title>
+
+<style>
+
+/* RESET */
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:'Segoe UI',sans-serif;
+}
+
+body{
+background:#0f172a;
+color:white;
+display:flex;
+}
+
+/* SIDEBAR */
+.sidebar{
+width:250px;
+height:100vh;
+background:#111827;
+position:fixed;
+left:0;
+top:0;
+padding:20px;
+}
+
+.sidebar h2{
+color:#38bdf8;
+text-align:center;
+margin-bottom:20px;
+}
+
+.sidebar a{
+display:block;
+color:white;
+text-decoration:none;
+padding:10px;
+background:#1e293b;
+border-radius:8px;
+margin-top:8px;
+}
+
+.sidebar a:hover{
+background:#38bdf8;
+}
+
+/* MAIN */
+.main{
+margin-left:270px;
+padding:30px;
+width:100%;
+}
+
+/* CONTAINER */
+.container{
+max-width:900px;
+margin:auto;
+background:#1e293b;
+padding:25px;
+border-radius:15px;
+}
+
+h1{
+text-align:center;
+color:#38bdf8;
+margin-bottom:20px;
+}
+
+/* ALERT BOX */
+.alert{
+padding:15px;
+margin-bottom:10px;
+border-radius:10px;
+background:#0f172a;
+border-left:5px solid #38bdf8;
+}
+
+.alert.red{
+border-left-color:#ef4444;
+}
+
+.alert.green{
+border-left-color:#22c55e;
+}
+
+.alert.yellow{
+border-left-color:#facc15;
+}
+
+/* BUTTON */
+button{
+padding:10px 15px;
+border:none;
+border-radius:8px;
+background:#0ea5e9;
+color:white;
+font-weight:bold;
+cursor:pointer;
+margin-top:10px;
+}
+
+button:hover{
+background:#0284c7;
+}
+
+</style>
+</head>
+
+<body>
+
+<!-- SIDEBAR -->
+<div class="sidebar">
+
+<h2>🚗 Smart Parking</h2>
+
+<a href="dashboard.html">📊 Dashboard</a>
+<a href="entry.html">🚘 Vehicle Entry</a>
+<a href="exit.html">🚪 Vehicle Exit</a>
+<a href="billing.html">💰 Billing</a>
+<a href="alerts.html">🚨 Alerts</a>
+<a href="reports.html">📈 Reports</a>
+
+<hr>
+
+<a href="index.html">🔐 Logout</a>
+
+</div>
+
+<!-- MAIN -->
+<div class="main">
+
+<div class="container">
+
+<h1>🚨 Alerts System</h1>
+
+<div class="alert green">
+✔ System Running Normally
+</div>
+
+<div class="alert yellow">
+⚠ Slot S3 is almost full
+</div>
+
+<div class="alert red">
+❌ Overstay detected: Vehicle MH12AB1234
+</div>
+
+<div class="alert">
+ℹ New vehicle entered at Gate 2
+</div>
+
+<button onclick="addAlert()">Add Random Alert</button>
+
+<div id="extraAlerts"></div>
+
+</div>
+
+</div>
+
+<script>
+
+function addAlert(){
+
+let messages = [
+"⚠ Parking limit reaching",
+"❌ Unauthorized entry detected",
+"✔ Slot freed successfully",
+"ℹ Vehicle exited safely"
+];
+
+let colors = ["yellow","red","green",""];
+
+let i = Math.floor(Math.random()*messages.length);
+
+let div = document.createElement("div");
+div.className = "alert " + colors[i];
+div.innerText = messages[i];
+
+document.getElementById("extraAlerts").appendChild(div);
+
+}
+
+</script>
+
+</body>
+</html>
